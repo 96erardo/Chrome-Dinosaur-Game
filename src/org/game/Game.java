@@ -3,14 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI;
+package org.game;
+
+import org.graphics.Renderer;
 
 /**
  *
- * @author GerardoAGL
+ * @author gerar
  */
-public class Main {
+public class Game {
     public static void main(String args[]) {
-        new Menu("Dinosaur");
+        Renderer.init();
+    }
+    
+    public static void quit() {
+        System.exit(0);
     }
 }
