@@ -21,7 +21,6 @@ public class Dinosaur extends Sprite{
     
     private float velocityY = 0.0f;
     private float velocityX = 50.0f;
-    private float moveX = 0;
     
     private Rectangle myRect = null;
     
@@ -34,7 +33,7 @@ public class Dinosaur extends Sprite{
     
     @Override
     public void update(float deltaTime) {        
-        moveX = 0;
+        float moveX = 0;
         
         if(Input.getKey(KeyEvent.VK_W)) {
             velocityY = -100;
@@ -51,7 +50,12 @@ public class Dinosaur extends Sprite{
         int futureX =(int)(posX + moveX * deltaTime);
         int futureY =(int)(posY + velocityY * deltaTime);
         
-        collisionDetection(futureX, futureY);
+        if(doesColide(posX + moveX * deltaTime, posY)) {
+            moveX -=moveX;
+        }
+        if(doesColide(posX, posY + velocityY * deltaTime)) {
+            velocityY -= velocityY;
+        }
         
         posX += moveX * deltaTime;
         posY += velocityY * deltaTime;
@@ -75,23 +79,25 @@ public class Dinosaur extends Sprite{
         g.drawString("dinosaur", x, y+20);
     }
     
-    public void collisionDetection(int futureX, int futureY) {
-        
-        Rectangle futureXRect = new Rectangle(futureX, (int)posY, width, height);
-        Rectangle futureYRect = new Rectangle((int)posX, futureY, width, height);
+    public boolean doesColide(float x, float y) {
+        float myLeft   = x;
+        float myRight  = x + width;
+        float myTop    = y;
+        float myBottom = y + height;
         
         for(Sprite sprite : World.currentWorld.sprites) {
-            if(sprite == this) {
+            if(sprite == this)
                 continue;
-            }
             
-            Rectangle other = sprite.getBounds();            
-            if(futureXRect.intersects(other) && sprite.isSolid()) {
-                moveX -= moveX;
-            }
-            if(futureYRect.intersects(other) && sprite.isSolid()) {
-                velocityY -= velocityY;
-            }
-        }
+            float otherLeft   = sprite.posX;
+            float otherRight  = sprite.posX + sprite.width;
+            float otherTop    = sprite.posY;
+            float otherBottom = sprite.posY + sprite.height;
+            
+            if(myLeft < otherRight && myRight > otherLeft && myBottom > otherTop && myTop < otherBottom) {
+                return true;
+            }            
+        }        
+        return false;
     }
 }
