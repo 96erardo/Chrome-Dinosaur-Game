@@ -36,8 +36,10 @@ public class Dinosaur extends Sprite{
         float moveX = 0;
         
         if(Input.getKey(KeyEvent.VK_W)) {
-            velocityY = -100;
-        }        
+            if(doesColide(posX, posY + 1)) {
+                velocityY = -100;
+            }                
+        }
         if(Input.getKey(KeyEvent.VK_A)) {
             moveX -= velocityX;
         }
@@ -46,9 +48,6 @@ public class Dinosaur extends Sprite{
         }
         
         velocityY += Game.gravity * deltaTime;
-        
-        int futureX =(int)(posX + moveX * deltaTime);
-        int futureY =(int)(posY + velocityY * deltaTime);
         
         if(doesColide(posX + moveX * deltaTime, posY)) {
             moveX -=moveX;

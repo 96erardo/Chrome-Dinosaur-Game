@@ -20,6 +20,8 @@ import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.awt.image.VolatileImage;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import org.input.Input;
 import org.world.World;
@@ -42,6 +44,9 @@ public class Renderer {
     private static long lastFPSCheck = 0;
     private static int currentFPS = 0;
     private static int totalFrames = 0;
+    
+    private static int targetFPS = 60;
+    private static int targetTime = 1000000000 / targetFPS;
     
     public static void init() {
         frame = new Frame();
@@ -79,6 +84,9 @@ public class Renderer {
                 VolatileImage vImage = gc.createCompatibleVolatileImage(DEFAULT_GAME_WIDTH, DEFAULT_GAME_HEIGHT);
                 
                 while(true) {     
+                    
+                    long startTime = System.nanoTime();
+                    
                     //FPS Counter
                     totalFrames++;
                     if(System.nanoTime() > (lastFPSCheck + 1000000000)) {
@@ -113,6 +121,17 @@ public class Renderer {
                     g.drawImage(vImage, 0, 0, canvasWidth, canvasHeight, null);
                     
                     g.dispose();
+                    
+                    long totalTime = System.nanoTime() - startTime;
+                    
+                    if(totalTime < targetTime) {
+                        try {
+                            Thread.sleep((targetTime - totalTime) / 1000000);
+                        } catch (InterruptedException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                    
                 }
             }
         };
