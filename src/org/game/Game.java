@@ -5,15 +5,28 @@
  */
 package org.game;
 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.graphics.Renderer;
+import org.object.Dinosaur;
+import org.world.World;
 
 /**
  *
  * @author gerar
  */
 public class Game {
+    
+    public static final int gravity = 200;
+    
     public static void main(String args[]) {
+        
         Renderer.init();
+        
+        World.currentWorld = new World();
+        World.currentWorld.sprites.add(new Dinosaur(100, 100));
     }
     
     public static void quit() {

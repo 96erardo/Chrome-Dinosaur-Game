@@ -6,6 +6,7 @@
 package org.object;
 
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
 /**
  *
@@ -13,11 +14,31 @@ import java.awt.Graphics;
  */
 public class Sprite {
     
-    public static void update(float deltaTime) {
-      
+    public float posX = 0;
+    public float posY = 0;
+    public int width;
+    public int height;
+    public boolean solid = false;
+    public BufferedImage image = null;
+    
+    public Sprite(float posX, float posY) {
+        this.posX = posX;
+        this.posY = posY;
+        this.width = width;
+        this.height = height;
+    }
+
+    public void update(float deltaTime) {
+        //
     }
     
-    public static void render(Graphics g) {
+    public void render(Graphics g) {    
+        if(image == null) {
+            return;
+        }
+        int realX = (int)posX;
+        int realY = (int)posY;
         
+        g.drawImage(image, realX, realY, width, height, null);
     }
 }

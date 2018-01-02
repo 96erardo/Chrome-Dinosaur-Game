@@ -17,7 +17,12 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
 import java.awt.image.VolatileImage;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import org.input.Input;
+import org.world.World;
 
 /**
  *
@@ -59,6 +64,9 @@ public class Renderer {
         });
         
         frame.setVisible(true);
+        
+        canvas.addKeyListener(new Input());
+        
         startRendering();
     }
     
@@ -85,11 +93,15 @@ public class Renderer {
                     
                     Graphics g = vImage.getGraphics();
                     
-                    g.setColor(Color.BLACK);
+                    g.setColor(new Color(247, 247, 247));
                     g.fillRect(0, 0, canvasWidth, canvasHeight);
+                    g.setColor(Color.BLACK);
+                    g.drawRect(0, 0, DEFAULT_GAME_WIDTH-1, DEFAULT_GAME_HEIGHT-1);
                     
                     
                     //RENDER STUFF
+                    World.update();
+                    World.render(g);
                     
                     //Draw FPS Counter
                     g.setColor(Color.YELLOW);
@@ -107,6 +119,17 @@ public class Renderer {
         
         thread.setName("Rendering Thread");
         thread.start();
+    }
+    
+    public static BufferedImage loadImage(String path) throws IOException {
+        
+        BufferedImage rawImage = ImageIO.read(Renderer.class.getResource(path));
+        BufferedImage finalImage = canvas.getGraphicsConfiguration()
+                .createCompatibleImage(rawImage.getWidth(), rawImage.getHeight(), rawImage.getTransparency());
+        
+        finalImage.getGraphics().drawImage(rawImage, 0, 0, rawImage.getWidth(), rawImage.getHeight(), null);
+    
+        return finalImage;
     }
     
     private static void makeFullscreen() {
