@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.graphics.Renderer;
 import org.object.Dinosaur;
+import org.object.Platform;
 import org.world.World;
 
 /**
@@ -27,6 +28,7 @@ public class Game {
         
         World.currentWorld = new World();
         World.currentWorld.sprites.add(new Dinosaur(100, 100));
+        World.currentWorld.sprites.add(new Platform(0, 300));
     }
     
     public static void quit() {

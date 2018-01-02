@@ -6,6 +6,7 @@
 package org.object;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 /**
@@ -19,6 +20,7 @@ public class Sprite {
     public int width;
     public int height;
     public boolean solid = false;
+    
     public BufferedImage image = null;
     
     public Sprite(float posX, float posY) {
@@ -41,4 +43,16 @@ public class Sprite {
         
         g.drawImage(image, realX, realY, width, height, null);
     }
+    
+    public Rectangle getBounds() {
+        
+        int realX = (int)posX;
+        int realY = (int)posY;
+        
+        return new Rectangle(realX, realY, width, height);
+    }
+
+    public boolean isSolid() {
+        return solid;
+    }   
 }

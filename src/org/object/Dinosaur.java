@@ -11,6 +11,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import org.game.Game;
 import org.input.Input;
+import org.world.World;
 
 /**
  *
@@ -20,6 +21,7 @@ public class Dinosaur extends Sprite{
     
     private float velocityY = 0.0f;
     private float velocityX = 50.0f;
+    private float moveX = 0;
     
     private Rectangle myRect = null;
     
@@ -27,23 +29,33 @@ public class Dinosaur extends Sprite{
         super(posX, posY);
         width = 50;
         height = 25;
+        solid = true;
     }
     
     @Override
-    public void update(float deltaTime) {
+    public void update(float deltaTime) {        
+        moveX = 0;
         
         if(Input.getKey(KeyEvent.VK_W)) {
             velocityY = -100;
         }        
         if(Input.getKey(KeyEvent.VK_A)) {
-            posX -= velocityX * deltaTime;
+            moveX -= velocityX;
         }
         if(Input.getKey(KeyEvent.VK_D)) {
-            posX += velocityX * deltaTime;
+            moveX += velocityX;
         }
         
         velocityY += Game.gravity * deltaTime;
+        
+        int futureX =(int)(posX + moveX * deltaTime);
+        int futureY =(int)(posY + velocityY * deltaTime);
+        
+        collisionDetection(futureX, futureY);
+        
+        posX += moveX * deltaTime;
         posY += velocityY * deltaTime;
+        
     }
     
     /**
@@ -63,4 +75,23 @@ public class Dinosaur extends Sprite{
         g.drawString("dinosaur", x, y+20);
     }
     
+    public void collisionDetection(int futureX, int futureY) {
+        
+        Rectangle futureXRect = new Rectangle(futureX, (int)posY, width, height);
+        Rectangle futureYRect = new Rectangle((int)posX, futureY, width, height);
+        
+        for(Sprite sprite : World.currentWorld.sprites) {
+            if(sprite == this) {
+                continue;
+            }
+            
+            Rectangle other = sprite.getBounds();            
+            if(futureXRect.intersects(other) && sprite.isSolid()) {
+                moveX -= moveX;
+            }
+            if(futureYRect.intersects(other) && sprite.isSolid()) {
+                velocityY -= velocityY;
+            }
+        }
+    }
 }
