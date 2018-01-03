@@ -5,7 +5,9 @@
  */
 package org.object;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import org.graphics.Renderer;
 
 /**
  *
@@ -25,6 +27,10 @@ public class Platform extends Sprite{
         int realX = (int) posX;
         int realY = (int) posY;
         
+        realX = realX - (int) Renderer.camX + Renderer.DEFAULT_GAME_WIDTH / 2;
+        realY = realY - (int) Renderer.camY + Renderer.DEFAULT_GAME_HEIGHT / 2;
+        
+        g.setColor(Color.BLACK);
         g.drawRect(realX, realY, width, height);
     }
     

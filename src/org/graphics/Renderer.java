@@ -38,8 +38,8 @@ public class Renderer {
     private static int canvasWidth = 0;
     private static int canvasHeight = 0;
     
-    private static final int DEFAULT_GAME_WIDTH = 500;
-    private static final int DEFAULT_GAME_HEIGHT = 350;
+    public static final int DEFAULT_GAME_WIDTH = 500;
+    public static final int DEFAULT_GAME_HEIGHT = 350;
     
     private static long lastFPSCheck = 0;
     private static int currentFPS = 0;
@@ -47,6 +47,9 @@ public class Renderer {
     
     private static int targetFPS = 60;
     private static int targetTime = 1000000000 / targetFPS;
+    
+    public static float camX = 0;
+    public static float camY = 0;
     
     public static void init() {
         frame = new Frame();
@@ -140,13 +143,18 @@ public class Renderer {
         thread.start();
     }
     
-    public static BufferedImage loadImage(String path) throws IOException {
+    public static BufferedImage loadImage(String path) {
         
-        BufferedImage rawImage = ImageIO.read(Renderer.class.getResource(path));
-        BufferedImage finalImage = canvas.getGraphicsConfiguration()
-                .createCompatibleImage(rawImage.getWidth(), rawImage.getHeight(), rawImage.getTransparency());
-        
-        finalImage.getGraphics().drawImage(rawImage, 0, 0, rawImage.getWidth(), rawImage.getHeight(), null);
+        BufferedImage rawImage;
+        BufferedImage finalImage = null;
+        try {
+            rawImage = ImageIO.read(Renderer.class.getResource(path));
+            finalImage = canvas.getGraphicsConfiguration().createCompatibleImage(rawImage.getWidth(), rawImage.getHeight(), rawImage.getTransparency());
+            finalImage.getGraphics().drawImage(rawImage, 0, 0, rawImage.getWidth(), rawImage.getHeight(), null);
+            
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     
         return finalImage;
     }

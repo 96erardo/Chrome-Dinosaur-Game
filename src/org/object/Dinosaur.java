@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import org.game.Game;
+import org.graphics.Renderer;
 import org.input.Input;
 import org.world.World;
 
@@ -27,8 +28,10 @@ public class Dinosaur extends Sprite{
     public Dinosaur(float posX, float posY) {
         super(posX, posY);
         width = 50;
-        height = 25;
+        height = 50;
         solid = true;
+        
+        image = Renderer.loadImage("/resources/image/yoshi.png");
     }
     
     @Override
@@ -59,23 +62,8 @@ public class Dinosaur extends Sprite{
         posX += moveX * deltaTime;
         posY += velocityY * deltaTime;
         
-    }
-    
-    /**
-     * Metodo sobreescrito temporalmente mientras se 
-     * crea la imagen para este sprite
-     * @param g 
-     */    
-    @Override
-    public void render(Graphics g) {
-        
-        int x = (int)posX;
-        int y = (int)posY;
-        
-        g.setColor(Color.GREEN);        
-        g.drawRect(x, y, width, height);
-        g.setColor(Color.BLACK);
-        g.drawString("dinosaur", x, y+20);
+        Renderer.camX = posX + width / 2;
+        Renderer.camY = posY + height / 2;        
     }
     
     public boolean doesColide(float x, float y) {

@@ -8,6 +8,7 @@ package org.object;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import org.graphics.Renderer;
 
 /**
  *
@@ -41,17 +42,12 @@ public class Sprite {
         int realX = (int)posX;
         int realY = (int)posY;
         
+        realX = realX - (int) Renderer.camX + Renderer.DEFAULT_GAME_WIDTH / 2;
+        realY = realY - (int) Renderer.camY + Renderer.DEFAULT_GAME_HEIGHT / 2;
+        
         g.drawImage(image, realX, realY, width, height, null);
     }
     
-    public Rectangle getBounds() {
-        
-        int realX = (int)posX;
-        int realY = (int)posY;
-        
-        return new Rectangle(realX, realY, width, height);
-    }
-
     public boolean isSolid() {
         return solid;
     }   
