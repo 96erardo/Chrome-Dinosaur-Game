@@ -17,6 +17,14 @@ public class World {
     
     public static World currentWorld = null;
     
+    public static int obstacles = 3;
+    
+    public static int currentObstacles = 0;
+    
+    public static float lastObstacle = 0.0f;
+    
+    public static int velocityX = 100;
+    
     private static long lastTime = System.nanoTime();
     
     public ArrayList<Sprite> sprites = new ArrayList<Sprite>();
@@ -26,6 +34,8 @@ public class World {
         float deltaTime = (System.nanoTime() - lastTime) / 1000000000.0f;
 
         lastTime = System.nanoTime();
+        
+        lastObstacle += deltaTime;
         
         for(Sprite sprite : currentWorld.sprites) {
             sprite.update(deltaTime);

@@ -27,8 +27,8 @@ public class Dinosaur extends Sprite{
     
     public Dinosaur(float posX, float posY) {
         super(posX, posY);
-        width = 50;
-        height = 50;
+        width = 25;
+        height = 25;
         solid = true;
         
         image = Renderer.loadImage("/resources/image/yoshi.png");
@@ -40,7 +40,7 @@ public class Dinosaur extends Sprite{
         
         if(Input.getKey(KeyEvent.VK_W)) {
             if(doesColide(posX, posY + 1)) {
-                velocityY = -100;
+                velocityY = -170;
             }                
         }
         if(Input.getKey(KeyEvent.VK_A)) {
@@ -60,10 +60,7 @@ public class Dinosaur extends Sprite{
         }
         
         posX += moveX * deltaTime;
-        posY += velocityY * deltaTime;
-        
-        Renderer.camX = posX + width / 2;
-        Renderer.camY = posY + height / 2;        
+        posY += velocityY * deltaTime;       
     }
     
     public boolean doesColide(float x, float y) {

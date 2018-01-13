@@ -17,8 +17,8 @@ public class Platform extends Sprite{
     
     public Platform(float posX, float posY) {
         super(posX, posY);
-        width = 200;
-        height = 10;
+        width = Renderer.DEFAULT_GAME_WIDTH;
+        height = 1; // 1 pixel
         solid = true;
     }
     
@@ -27,11 +27,8 @@ public class Platform extends Sprite{
         int realX = (int) posX;
         int realY = (int) posY;
         
-        realX = realX - (int) Renderer.camX + Renderer.DEFAULT_GAME_WIDTH / 2;
-        realY = realY - (int) Renderer.camY + Renderer.DEFAULT_GAME_HEIGHT / 2;
-        
-        g.setColor(Color.BLACK);
-        g.drawRect(realX, realY, width, height);
+        g.setColor(Color.RED);
+        g.drawLine(realX, realY, Renderer.DEFAULT_GAME_WIDTH, realY);
     }
     
 }

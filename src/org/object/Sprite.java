@@ -27,8 +27,6 @@ public class Sprite {
     public Sprite(float posX, float posY) {
         this.posX = posX;
         this.posY = posY;
-        this.width = width;
-        this.height = height;
     }
 
     public void update(float deltaTime) {
@@ -41,13 +39,10 @@ public class Sprite {
         }
         int realX = (int)posX;
         int realY = (int)posY;
-        
-        realX = realX - (int) Renderer.camX + Renderer.DEFAULT_GAME_WIDTH / 2;
-        realY = realY - (int) Renderer.camY + Renderer.DEFAULT_GAME_HEIGHT / 2;
-        
+           
         g.drawImage(image, realX, realY, width, height, null);
     }
-    
+
     public boolean isSolid() {
         return solid;
     }   

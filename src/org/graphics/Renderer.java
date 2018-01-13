@@ -48,9 +48,6 @@ public class Renderer {
     private static int targetFPS = 60;
     private static int targetTime = 1000000000 / targetFPS;
     
-    public static float camX = 0;
-    public static float camY = 0;
-    
     public static void init() {
         frame = new Frame();
         canvas = new Canvas();

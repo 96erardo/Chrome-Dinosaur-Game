@@ -12,6 +12,9 @@ import java.util.logging.Logger;
 import org.graphics.Renderer;
 import org.object.Dinosaur;
 import org.object.Platform;
+import org.object.obstacle.Large;
+import org.object.obstacle.Medium;
+import org.object.obstacle.Small;
 import org.world.World;
 
 /**
@@ -20,15 +23,22 @@ import org.world.World;
  */
 public class Game {
     
-    public static final int gravity = 200;
+    public static final int gravity = 400;
+    public static int velocityX = 20;
     
     public static void main(String args[]) {
         
         Renderer.init();
         
         World.currentWorld = new World();
-        World.currentWorld.sprites.add(new Dinosaur(100, 100));
-        World.currentWorld.sprites.add(new Platform(0, 300));
+        World.currentWorld.sprites.add(new Dinosaur(10, 300));
+        World.currentWorld.sprites.add(new Platform(0, 340));
+        World.currentWorld.sprites.add(new Small(510, 329));
+        World.currentWorld.sprites.add(new Medium(510, 324));
+        World.currentWorld.sprites.add(new Large(510, 324));
+        World.currentWorld.sprites.add(new Small(510, 329));
+        World.currentWorld.sprites.add(new Medium(510, 324));
+        World.currentWorld.sprites.add(new Large(510, 324));
     }
     
     public static void quit() {
