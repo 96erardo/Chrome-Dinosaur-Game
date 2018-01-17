@@ -5,6 +5,7 @@
  */
 package org.game;
 
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -43,5 +44,9 @@ public class Game {
     
     public static void quit() {
         System.exit(0);
+    }
+    
+    public static void GameOver(Graphics g) {
+        
     }
 }

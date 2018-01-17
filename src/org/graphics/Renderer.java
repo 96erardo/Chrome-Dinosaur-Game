@@ -124,6 +124,8 @@ public class Renderer {
                     
                     long totalTime = System.nanoTime() - startTime;
                     
+                    System.out.println(World.currentObstacles);
+                    
                     if(totalTime < targetTime) {
                         try {
                             Thread.sleep((targetTime - totalTime) / 1000000);

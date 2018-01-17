@@ -64,9 +64,6 @@ public class Small extends Sprite {
 
     // METHOD THAT WILL DECIDE IF THE OBSTACLE SHOULD APPEAR OR NOT
     public boolean shouldMove(double number) {
-
-        System.out.println(number);
-
         if (number <= 0.5) {
             return false;
         } else {

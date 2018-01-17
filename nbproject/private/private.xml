@@ -3,11 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/gerar/development/java/Chrome-Dinosaur-Game/src/org/graphics/Renderer.java</file>
             <file>file:/C:/Users/gerar/development/java/Chrome-Dinosaur-Game/src/org/object/Platform.java</file>
             <file>file:/C:/Users/gerar/development/java/Chrome-Dinosaur-Game/src/org/world/World.java</file>
-            <file>file:/C:/Users/gerar/development/java/Chrome-Dinosaur-Game/src/org/object/Dinosaur.java</file>
-            <file>file:/C:/Users/gerar/development/java/Chrome-Dinosaur-Game/src/org/object/Sprite.java</file>
+            <file>file:/C:/Users/gerar/development/java/Chrome-Dinosaur-Game/src/org/object/obstacle/Medium.java</file>
             <file>file:/C:/Users/gerar/development/java/Chrome-Dinosaur-Game/src/org/game/Game.java</file>
+            <file>file:/C:/Users/gerar/development/java/Chrome-Dinosaur-Game/src/org/object/obstacle/Small.java</file>
+            <file>file:/C:/Users/gerar/development/java/Chrome-Dinosaur-Game/src/org/object/obstacle/Large.java</file>
         </group>
     </open-files>
 </project-private>

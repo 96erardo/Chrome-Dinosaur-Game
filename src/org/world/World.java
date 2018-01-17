@@ -17,7 +17,7 @@ public class World {
     
     public static World currentWorld = null;
     
-    public static int obstacles = 3;
+    public static int obstacles = 4;
     
     public static int currentObstacles = 0;
     
